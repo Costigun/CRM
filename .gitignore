@@ -7,6 +7,7 @@ __pycache__/
 *.so
 
 # Distribution / packaging
+.git
 .Python
 build/
 develop-eggs/
@@ -82,6 +83,7 @@ celerybeat-schedule
 *.sage.py
 
 # Environments
+myvenv/
 .env
 .venv
 env/
