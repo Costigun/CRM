@@ -1,11 +1,11 @@
 from .models import Users,Tables,ServicePercentage,Statuses,Meals,MealsToOrder,Meal_Categories,Department,Order,Roles,Check
 from rest_framework import serializers
-
+"""
 class UsersSerializer(serializers.ModelSerializer):
     class Meta:
         model = Users
         fields = ('id','name','surname','roleid','login','email','phone')
-
+"""
 class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
@@ -38,3 +38,7 @@ class CheckSerializer(serializers.ModelSerializer):
         result['total_sum'] = total_sum
         return total_sum
 
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Users
+        fields = ('email','username')

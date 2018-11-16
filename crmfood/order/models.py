@@ -1,16 +1,13 @@
 from django.db import models
 
-class Users(models.Model):
+from django.contrib.auth.models import AbstractUser
+
+class Users(AbstractUser):
     name = models.CharField(max_length=50)
-    surname = models.CharField(max_length=50)
-    login = models.CharField(max_length=50)
-    password = models.CharField(max_length=100)
-    email = models.CharField(max_length=100)
-    phone = models.IntegerField()
-    roleid = models.ForeignKey('Roles',on_delete=models.CASCADE)
+    #roleid = models.ForeignKey('Roles',on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.name
+        return self.email
 
     class Meta:
         verbose_name = 'Users'

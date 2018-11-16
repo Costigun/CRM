@@ -24,8 +24,9 @@ from order import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    url(r'reg/v1/',include('reg.urls')),
     #url(r'',include(router.urls)),
-    url(r'users',views.UsersView.as_view()),
+    #url(r'users',views.UsersView.as_view()),
     url(r'order',views.OrderView.as_view()),
     url(r'checks',views.CheckView.as_view()),
     url(r'meals',views.MealView.as_view()),
