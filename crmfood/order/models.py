@@ -2,8 +2,28 @@ from django.db import models
 
 from django.contrib.auth.models import AbstractUser
 
+ROLES=[
+        ('waiter','WAITER'),
+        ('chief','CHIEF'),
+        ('admin','ADMIN'),
+        ('stripgirl','STRIPTISE'),
+    ]
+
+class Profile(models.Model):
+    user = models.OneToOneField('Users', on_delete=models.PROTECT)
+    roleid = models.ForeignKey('Roles',on_delete=models.CASCADE)
+    dateborn = models.DateField()
+    phone = models.CharField(max_length=20)
+
+    class Meta:
+        verbose_name = 'Profiles'
+        verbose_name_plural = 'Профили'
+
+    def __str__(self):
+        return self.phone
+
 class Users(AbstractUser):
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=50,choices=ROLES,default='waiter')
     #roleid = models.ForeignKey('Roles',on_delete=models.CASCADE)
 
     def __str__(self):
@@ -13,8 +33,9 @@ class Users(AbstractUser):
         verbose_name = 'Users'
         verbose_name_plural = 'Персонал'
 
+
 class Roles(models.Model):
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=50,choices=ROLES)
 
     def __str__(self):
         return self.name
@@ -66,7 +87,7 @@ class Meals(models.Model):
     categoryid = models.ForeignKey(Meal_Categories,on_delete=models.CASCADE)
     name = models.CharField(max_length=70)
     description = models.CharField(max_length=150)
-    price = models.DecimalField(max_digits=6,decimal_places=2)
+    price = models.CharField(max_length=20)
 
     def __str__(self):
         return self.name
@@ -90,7 +111,7 @@ class Order(models.Model):
         verbose_name_plural = 'Заказы'
 
 class MealsToOrder(models.Model):
-    quantity = models.IntegerField(default=1)
+    quantity = models.CharField(default=1,max_length=20)
     meals = models.ForeignKey(Meals,on_delete=models.CASCADE)
     orderid = models.ForeignKey(Order,on_delete=models.CASCADE)
 

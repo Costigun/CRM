@@ -38,6 +38,11 @@ class CheckSerializer(serializers.ModelSerializer):
         result['total_sum'] = total_sum
         return total_sum
 
+class RoleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Roles
+        fields = ('__all__')
+
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = Users

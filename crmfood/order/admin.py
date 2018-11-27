@@ -3,7 +3,11 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin
 
 from .forms import CustomUserChangeForm,CustomUserCreationForm
-from .models import Users,Tables,Roles,Statuses,Meals,Meal_Categories,Department,Order,MealsToOrder,Check,ServicePercentage
+from .models import Users,Tables,Roles,Statuses,Meals,Meal_Categories,Department,Order,MealsToOrder,Check,ServicePercentage,Profile
+
+class UserInLine(admin.StackedInline):
+    model = Profile
+    extra = 0
 
 
 class CustomUserAdmin(UserAdmin):
@@ -11,8 +15,7 @@ class CustomUserAdmin(UserAdmin):
     form = CustomUserChangeForm
     model = Users
     list_display = ('email','name')
-
-
+    inlines = [UserInLine]
 
 admin.site.register(Users,CustomUserAdmin)
 admin.site.register(Tables)
